@@ -22,13 +22,10 @@ contract Trash is ERC721, Ownable {
         baseURI = _baseURI;
     }
 
-    function mint(uint256 amount) external onlyOwner {
+    function mint(address to, uint256 id) external onlyOwner {
         unchecked {
-            for (uint256 index = 0; index < amount; index++) {
-                uint256 tokenId = totalSupply + 1;
-                _mint(msg.sender, tokenId);
-                totalSupply++;
-            }
+            _mint(to, id);
+            totalSupply++;
         }
     }
 
