@@ -15,3 +15,4 @@ docs/
 
 # Private files
 private/
+private.env
