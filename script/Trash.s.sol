@@ -9,10 +9,11 @@ contract TrashScript is Script {
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        string memory baseURI = vm.envString("BASE_URI");
 
         vm.startBroadcast(deployerPrivateKey);
 
-        Trash trash = new Trash("Trash", "TRSH", "");
+        Trash trash = new Trash("Trash", "TRSH", baseURI);
 
         vm.stopBroadcast();
     }

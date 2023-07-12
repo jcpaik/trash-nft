@@ -7,6 +7,7 @@ import {Ownable} from "openzeppelin/access/Ownable.sol";
 import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
 
 error TokenDoesNotExist();
+error TokenNotTransferrable();
 
 contract Trash is ERC721, Ownable {
     using Strings for uint256;
@@ -29,6 +30,14 @@ contract Trash is ERC721, Ownable {
         }
     }
 
+    function transferFrom(
+        address from,
+        address to,
+        uint256 id
+    ) public override {
+        revert TokenNotTransferrable();
+    }
+
     function tokenURI(uint256 tokenId)
         public
         view
@@ -39,9 +48,6 @@ contract Trash is ERC721, Ownable {
             revert TokenDoesNotExist();
         }
 
-        return
-            bytes(baseURI).length > 0
-                ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json"))
-                : "";
+        return baseURI;
     }
 }
